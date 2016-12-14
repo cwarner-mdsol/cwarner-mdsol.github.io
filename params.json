@@ -1,0 +1,6 @@
+{
+  "name": "Cwarner-mdsol.GitHub.io",
+  "tagline": "useful information",
+  "body": "### i'm on pto\r\n\r\nThere isn't much to say most things are operational or working and shouldn't have any problems continuing to function for the next 2 weeks.\r\n\r\n### Things that could possibly break\r\n\r\nldap, kvluster would be the only major concerns but it's highly unlikely. In the cases where there is failure for LDAP one can search sumologic with the following regex:  \r\n``` (ldap) AND _sourceName=\"/mnt/medistrano/shared/log/ldap_integration.log ```  \r\nAnd it should provide relevant information as to what is going on. For the most part you'll see errors like ``` ERROR -- : Failed to add 'ayong' to LDAP group 'engineer': uniqueMember: value #0 invalid per syntax ```\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
