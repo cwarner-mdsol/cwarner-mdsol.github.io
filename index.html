@@ -45,8 +45,9 @@
 
 <p><code>(ldap) AND _sourceName="/mnt/medistrano/shared/log/ldap_integration.log</code>  </p>
 
-<p>And it should provide relevant information as to what is going on. For the most part you'll see errors resembling<br>
-<code>ERROR -- : Failed to add 'someuser' to LDAP group 'engineer': uniqueMember: value #0 invalid per syntax</code>  </p>
+<p>This should provide relevant information as to what is going on. For the most part as of right now you'll see errors resembling (this is for adding to groups but a similar message appears for adding a new user):  </p>
+
+<p><code>ERROR -- : Failed to add 'someuser' to LDAP group 'engineer': uniqueMember: value #0 invalid per syntax</code>  </p>
 
 <p>This has been resolved with <a href="https://github.com/mdsol/medistrano/pull/1943">PR 1943</a> and should hopefully be merged shortly. At least I really hope so, if not it'll mean having to add new users to ldap every time there is a new user. While I hope it isn't much I had to manually add 13 users when this bug was identified. Which means in the two week span we had that many users.</p>
 
