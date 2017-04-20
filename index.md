@@ -1,0 +1,24 @@
+### i'm on pto from 12/15/2016 - 01/03/2016
+
+There isn't much to say most things are operational or working and shouldn't have any problems continuing to function for the next 2 weeks.
+
+### Things could possibly stop being functional however
+
+ldap and the kvcluster would be the only major concerns but anything going immediately wrong here is highly unlikely. In the cases where there is abject failure for LDAP one can search sumologic with the following regex:  
+
+``` (ldap) AND _sourceName="/mnt/medistrano/shared/log/ldap_integration.log ```  
+
+And it should provide relevant information as to what is going on. For the most part you'll see errors resembling  
+``` ERROR -- : Failed to add 'someuser' to LDAP group 'engineer': uniqueMember: value #0 invalid per syntax ```  
+
+This has been resolved with [PR 1943](https://github.com/mdsol/medistrano/pull/1943) and should hopefully be merged shortly. At least I really hope so, if not it'll mean having to add new users to ldap every time there is a new user. While I hope it isn't much I had to manually add 13 users when this bug was identified. Which means in the two week span we had that many users.
+
+### ldap
+Ldap is down, what do I do? Do not panic, all six nodes would have to go down for it to be a real issue. If that has happened, there are much bigger problems. That aside you can spin up a new LDAP cluster and migrate the data from the latest backup in S3. [Instructions on how to spin up ldap with latest backup](https://github.com/mdsol/openldap-playbook/blob/master/docs/ldap_administration_manual.md). A vote of confidence is that this has never happened before, even during the rush on the cluster during initial introduction, the nodes themselves never actually went down (they slowed to a crawl but kept processing requests, albeit, extremely slowly).
+
+### kvcluster
+If the key value cluster goes down for some reason, all nodes would have to fail, there are much bigger problems if this happens. If we lose 2 nodes the cluster is still fully operational. [Cluster Health](http://kvcluster.imedidata.net:8500/ui/#/infra-us-east-1/services/consul) - [Help! Need to spin up a new cluster] (https://github.com/mdsol/kvcluster-playbook/blob/54915e49c34206936aecbd1b7ff21dd82d9f9522/docs/starting%20the%20cluster.md). A vote of confidence is that this has actually happened where we lost one of the nodes, the cluster kept working without anyone noticing for almost an entire week. Once identified we pulled the node, no data was loss and nothing actually happened. It looked as if the node was just unreachable for a period of time and was deemed inactive and removed from the rest of the cluster.
+
+### masterbuilder 
+This gets a halfway mention even though it's not really that big of a deal if it goes down. Medistrano will just expire the cache and not be able to pull any new ami's from this list. Some of those ami's are in use but as a workaround one can just set the custom ami value to those ami id's. Vote of confidence is that this has never happened.
+
