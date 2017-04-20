@@ -2,7 +2,7 @@ title: Cwarner-mdsol.GitHub.io
 description: useful information
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-midnight
+theme: jekyll-theme-minimal
 
 gems:
   - jekyll-mentions
