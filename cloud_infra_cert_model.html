@@ -39,7 +39,7 @@
 <p>Certbot does the initial request for the certificate based on data that we provide and then is setup to automate renewal. This can be automated such that it will request and renew a certificate for a certain property (whatever_here.imediata.net). In this case we've done so for <strong><a href="http://vault.imedidata.net">vault.imedidata.net</a></strong> and have the cert/keys placed in /etc/letsencrypt/live/vault.imedidata.net/fullchain.pem and /etc/letsencrypt/live/vault.imedidata.net/privkey.pem respectively.</p>
 <p>Our vault application is then configured to use this cert/key combo for TLS and that's all there is to it. We don't have to modify any root stores because the Let's Encrypt CA is signed by <a href="https://www.identrust.com/">IdenTrust</a> which is already available in most major operating systems ssl root stores.</p>
 <h3>Cert Revocation</h3>
-<p>We can revoke a cert at anytime, for any reason and have one summarily issued again. TLS Cipher Suite compromised? No problem. Someone copies the cert into github accidentally. No problem. We simple revoke and reissue.</p>
+<p>We can revoke a cert at anytime, for any reason and have one summarily issued again. TLS Cipher Suite compromised? No problem. Someone copies the cert into github accidentally. No problem. We simply revoke and reissue.</p>
 <h3>Cert Expiration/Renew</h3>
 <p>We also have the ability to renew certs well ahead of their renewal time. This allows us to make decisions easily to renew a cert more often or less often depending on whatever is needed at the time. So if the service is less used, or SLA's/contracts have been updated this becomes an easy process. Certbot handles renewals automatically.</p>
 <h3>Cert Inspection</h3>
