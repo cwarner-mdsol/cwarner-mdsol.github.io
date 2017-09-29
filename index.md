@@ -1,6 +1,6 @@
-### i'm on pto from 4/24/2017 - 05/02/2017
+### i'm on pto from 10/02/2017 - 10/04/2017
 
-There isn't much to say most things are operational or working and shouldn't have any problems continuing to function for the next week or so.
+There isn't much to say most things are operational or working and shouldn't have any problems continuing to function for the next couple of days.
 
 ### Things could possibly stop being functional however
 
@@ -30,6 +30,8 @@ If the key value cluster goes down for some reason, all nodes would have to fail
 
 ### tower
 Tower could possibly go down if the node goes bad as the clustered version isn't operational yet. Don't shutdown or terminate the bad node. In this case you'll have to spin up a new node in red. It should have the same iam-role and settings as the bad node so just copy from there and download the tower-latest-setup install program, the backups for tower are in the operations-red bucket in tower.imedidata.net and just pull the latest. One you have the backup tarball, simply put in the directory and mv it to tower-backup-latest.tar.gz and run ./setup.sh -r. From there point the route53 A record to the fresh node and give it 60 seconds. Do not terminate the bad node, just stop it so I can diagnose when I get back, or even better figure out what the problem is and fix it before I get back. Do not make any modifications to the configuration unless you absolutely must. Tower is in "beta" and not heavily used just yet so no big deal, a handful of people would be inconvenienced at best. The other thing is tower can't connect to X nodes or whatever. I haven't gotten around to making sure the cloud-app group has the tower ip (really need the tower sec group which has a list of the ips) in any event you can just add the current ip for now until this is ready. The only account available right now is green.
+
+Administrative changes to projects and templates should be ok to execute on. 
 
 ### Do not make changes unless someone can prove their problem
 Please, do not make any infrastructure related changes to any of the above unless someone can prove their problem with data, a trace, coredump, screenshot, something. We have to stop this idea that things just magically happen and jumping on the truck everytime someone yells fire. Things happen and there are valid reasons for that but unless it's affecting everyone 9 times out of 10 it's related to that specific user. Please operate on that notion until proven otherwise. If they can't show, prove or communicate the problem, leave it until I get back. Especially if it's not affecting any other user.
